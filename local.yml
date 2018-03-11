@@ -1,4 +1,6 @@
-- name: Deploy basic web server
+# This playbook is meant to be called with ansible-pull
+# This is the default playbook if hostname is not found in this repo
+- name: Deploy basic web server (self-service)
   hosts: localhost
   vars:
     index_title: Awesome web server
