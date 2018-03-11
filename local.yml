@@ -1,5 +1,5 @@
 - name: Deploy basic web server
-  hosts: all
+  hosts: localhost
   vars:
     index_title: Awesome web server
     index_content: I am {{ ansible_hostname | upper }} !
