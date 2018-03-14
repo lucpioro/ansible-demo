@@ -4,7 +4,7 @@
   hosts: localhost
   vars:
     index_title: Awesome web server
-    index_content: I am {{ ansible_hostname | upper }} !
+    index_content: I am {{ ansible_hostname | upper }} ! This web server was installed with ansible-pull
     
   tasks:
   - name: httpd package is present
