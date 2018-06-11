@@ -5,7 +5,7 @@
   vars:
     index_title: Awesome web server
     index_content: |
-                I am {{ ansible_hostname | upper }} !
+                This is {{ ansible_hostname | upper }}
                 <br>This web server was installed with ansible-pull
     
   tasks:
