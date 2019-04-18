@@ -24,3 +24,6 @@
     service:
       name: httpd
       state: started
+
+  - debug:
+      msg: Successful deployment on '{{ ansible_ssh_host }}'
