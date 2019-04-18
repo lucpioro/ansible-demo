@@ -6,7 +6,7 @@
     index_title: Awesome web server
     index_content: |
                 Welcome on {{ ansible_hostname | upper }}
-                <br>This web server was installed with Ansible Tower
+                <br>This is the {{ app_name | default('Green') }} application web server </br>
     
   tasks:
   - name: httpd package is present
