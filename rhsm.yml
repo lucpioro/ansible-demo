@@ -8,4 +8,4 @@
         username: '{{ rhsm_username | default(omit) }}'
         password: '{{ rhsm_password | default(omit) }}'
         auto_attach: true
-        state: "{{ rhsm_state | deafult('present') }}"
+        state: "{{ rhsm_state | default('present') }}"
