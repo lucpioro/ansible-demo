@@ -8,7 +8,7 @@
         name: insights-client
 
     - name: Check status of Insights .unregister file
-      stat: 
+      stat:
         path: /etc/redhat-access-insights/.unregistered
       register: unreg_file_task
 
@@ -24,7 +24,7 @@
         - reg_file_task.stat.exists == true
 
     - name: Register to the Red Hat Access Insights Service
-      command: insights-client --register --display-name={{ ansible_hostname }} 
+      command: insights-client --register --display-name={{ ec2_ip_address }} 
 #      args:
 #        creates: /etc/redhat-access-insights/.registered
 #      when: unreg_file_task.stat.exists == false
