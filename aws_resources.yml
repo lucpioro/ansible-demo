@@ -1,1 +1,41 @@
+- name: Deploy RHEL8 EC2
+  hosts: localhost
+  gather_facts: false
+  vars:
+    unit:
+      name: fleet8
+      ami: RHEL-8.0.0_HVM-20190520-x86_64-1-Hourly2-GP2
+    stack_name: "{{ lookup('file','/var/tmp/stack_name')}}"
+    vpc_subnet_id: "{{ lookup('file','/var/tmp/vpc_subnet_id')}}"
+    state: present
+    user_data: |
+      #!/bin/bash
+      python --version || yum -y install python3
+      curl -O https://bootstrap.pypa.io/get-pip.py
+      python get-pip.py || python3 get-pip.py
+      pip install awscli
+      aws s3 cp s3://{{ stack_name }}-sekai-umi/user_data/{{ unit.name }}.sh ~
+      bash ~/{{ unit.name }}.sh
 
+
+- name: EC2 - Find AMI
+  ec2_ami_facts:
+    filters:
+      name: '{{ ami | default(unit.ami) | default(rhel_ami) }}'
+  register: ami_list
+
+- name: EC2 - Working on {{ unit.name | title }} --> {{ state }}
+  ec2:
+    instance_type: 't3.micro'
+    image: "{{ (ami_list.images | sort(attribute='creation_date'))[-1].image_id }}"
+    key_name: ''
+    vpc_subnet_id: '{{ vpc_subnet_id | default(omit) }}'
+    group: '{{ stack_name }}_{{ unit.group | default(unit.name) }}'
+    instance_tags: '{{ global_tags | combine( { "Name": stack_name + "_" + ( label | default(unit.name) ) } ) }}'
+    count_tag:
+      Name: '{{ stack_name }}_{{ label | default(unit.name) }}'
+    exact_count: '{{ { "absent": 0 }[ state ] | default(unit.count) | default(1) }}'
+    wait: '{{ {"absent": true }[ state ] | default(omit) }}'
+    assign_public_ip: true
+    instance_profile_name: '{{ stack_name }}_sekai_umi_access'
+    user_data: '{{ user_data }}'
