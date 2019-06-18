@@ -24,7 +24,7 @@
         - reg_file_task.stat.exists == true
 
     - name: Register to the Red Hat Access Insights Service
-      command: insights-client --register --display-name={{ ansible_hostname }} 
+      command: insights-client --register --display-name={{ ansible_fqdn }} 
 #      args:
 #        creates: /etc/redhat-access-insights/.registered
 #      when: unreg_file_task.stat.exists == false
