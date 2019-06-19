@@ -16,7 +16,7 @@
       bash ~/{{ unit.name }}.sh
     global_tags:
       stack: '{{ stack_name }}'
-      owner: '{{ lookup('file','/var/tmp/stack_owner')}}'
+      owner: "{{ lookup('file','/var/tmp/stack_owner')}}"
       source: sekai
 
 - name: EC2 - Find AMI
