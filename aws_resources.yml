@@ -1,5 +1,5 @@
 - name: Deploy RHEL8 EC2
-  hosts: localhost
+  hosts: all
   gather_facts: false
   vars:
     unit_name: fleet8
