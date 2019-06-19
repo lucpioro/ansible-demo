@@ -19,24 +19,25 @@
       owner: "{{ lookup('file','/var/tmp/stack_owner')}}"
       source: sekai
 
-- name: EC2 - Find AMI
-  ec2_ami_facts:
-    filters:
-      name: '{{ ami }}'
-  register: ami_list
+  tasks:
+  - name: EC2 - Find AMI
+    ec2_ami_facts:
+      filters:
+        name: '{{ ami }}'
+    register: ami_list
 
-- name: EC2 - Working on {{ unit_name | title }} --> {{ state }}
-  ec2:
-    instance_type: 't3.micro'
-    image: "{{ (ami_list.images | sort(attribute='creation_date'))[-1].image_id }}"
-    key_name: ''
-    vpc_subnet_id: '{{ vpc_subnet_id | default(omit) }}'
-    group: '{{ stack_name }}_{{ unit_name }}'
-    instance_tags: '{{ global_tags | combine( { "Name": stack_name + "_" + unit_name } ) }}'
-    count_tag:
-      Name: '{{ stack_name }}_{{ unit_name }}'
-    exact_count: '{{ { "absent": 0 }[ state ] | default(count) | default(1) }}'
-    wait: '{{ {"absent": true }[ state ] | default(omit) }}'
-    assign_public_ip: true
-    instance_profile_name: '{{ stack_name }}_sekai_umi_access'
-    user_data: '{{ user_data }}'
+  - name: EC2 - Working on {{ unit_name | title }} --> {{ state }}
+    ec2:
+      instance_type: 't3.micro'
+      image: "{{ (ami_list.images | sort(attribute='creation_date'))[-1].image_id }}"
+      key_name: ''
+      vpc_subnet_id: '{{ vpc_subnet_id | default(omit) }}'
+      group: '{{ stack_name }}_{{ unit_name }}'
+      instance_tags: '{{ global_tags | combine( { "Name": stack_name + "_" + unit_name } ) }}'
+      count_tag:
+        Name: '{{ stack_name }}_{{ unit_name }}'
+      exact_count: '{{ { "absent": 0 }[ state ] | default(count) | default(1) }}'
+      wait: '{{ {"absent": true }[ state ] | default(omit) }}'
+      assign_public_ip: true
+      instance_profile_name: '{{ stack_name }}_sekai_umi_access'
+      user_data: '{{ user_data }}'
