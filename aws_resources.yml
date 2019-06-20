@@ -20,6 +20,13 @@
       source: sekai
 
   tasks:
+  - name: Ensure boto and boto3 modules are installed
+    pip:
+      name: "{{ item }}"
+    loop:
+      - boto3
+      - botocore
+  
   - name: EC2 - Find AMI
     ec2_ami_facts:
       filters:
