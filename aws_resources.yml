@@ -12,8 +12,8 @@
       curl -O https://bootstrap.pypa.io/get-pip.py
       python get-pip.py || python3 get-pip.py
       pip install awscli
-      aws s3 cp s3://{{ stack_name }}-sekai-umi/user_data/{{ unit.name }}.sh ~
-      bash ~/{{ unit.name }}.sh
+      aws s3 cp s3://{{ stack_name }}-sekai-umi/user_data/{{ unit_name }}.sh ~
+      bash ~/{{ unit_name }}.sh
     global_tags:
       stack: '{{ stack_name }}'
       owner: "{{ lookup('file','/var/tmp/stack_owner')}}"
@@ -36,7 +36,7 @@
       instance_tags: '{{ global_tags | combine( { "Name": stack_name + "_" + unit_name } ) }}'
       count_tag:
         Name: '{{ stack_name }}_{{ unit_name }}'
-      exact_count: '{{ { "absent": 0 }[ state ] | default(count) | default(1) }}'
+      exact_count: '{{ { "absent": 0 }[ state ] | default(count) | default(3) }}'
       wait: '{{ {"absent": true }[ state ] | default(omit) }}'
       assign_public_ip: true
       instance_profile_name: '{{ stack_name }}_sekai_umi_access'
