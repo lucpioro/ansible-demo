@@ -30,7 +30,7 @@
     ec2:
       instance_type: 't3.micro'
       image: "{{ (ami_list.images | sort(attribute='creation_date'))[-1].image_id }}"
-      key_name: ''
+      key_name: 'aude'
       vpc_subnet_id: '{{ vpc_subnet_id | default(omit) }}'
       group: '{{ stack_name }}_{{ unit_name }}'
       instance_tags: '{{ global_tags | combine( { "Name": stack_name + "_" + unit_name } ) }}'
