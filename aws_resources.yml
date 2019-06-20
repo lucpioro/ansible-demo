@@ -33,7 +33,7 @@
       key_name: '{{ global_tags.owner }}'
       vpc_subnet_id: '{{ vpc_subnet_id | default(omit) }}'
       region: eu-west-1
-      group: '{{ stack_name }}_{{ unit_name }}'
+      group: '{{ stack_name }}_fleet'
       instance_tags: '{{ global_tags | combine( { "Name": stack_name + "_" + unit_name } ) }}'
       count_tag:
         Name: '{{ stack_name }}_{{ unit_name }}'
