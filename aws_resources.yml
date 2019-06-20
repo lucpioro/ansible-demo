@@ -24,7 +24,6 @@
     pip:
       name: "{{ item }}"
     loop:
-      - boto3
       - botocore
   
   - name: EC2 - Find AMI
