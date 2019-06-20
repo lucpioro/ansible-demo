@@ -20,7 +20,7 @@
       source: sekai
 
   tasks:
-  - name: EC2 - Find AMI
+  - name: EC2 - Find {{ rhel_version }} AMI
     ec2_ami_facts:
       filters:
         name: '{{ ami }}'
