@@ -22,9 +22,8 @@
   tasks:
   - name: Ensure boto and boto3 modules are installed
     pip:
-      name: "{{ item }}"
-    loop:
-      - botocore
+      name: "botocore"
+      extra_args:   "--user"
   
   - name: EC2 - Find AMI
     ec2_ami_facts:
