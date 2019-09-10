@@ -7,7 +7,7 @@
     - name: Ensure at is available
       package:
         name: at
-        present: true
+        state: present
         
     - name: Add user to wheel group
       blockinfile:
