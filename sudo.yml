@@ -4,6 +4,11 @@
   become: true
   
   tasks:
+    - name: Ensure at is available
+      package:
+        name: at
+        present: true
+        
     - name: Add user to wheel group
       blockinfile:
         path: /etc/sudoers.d/{{ username }}
