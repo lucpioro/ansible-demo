@@ -1,0 +1,17 @@
+- name: Give basic sudoer permissions
+  hosts: all
+  gather_facts: false
+  
+  tasks:
+    - name: Add user to wheel group
+      blockinfile:
+        path: /etc/sudoers.d/{{ username }}
+        block: |
+               {{ username }} ALL=(ALL) NOPASSWD:ALL
+
+    - name: Time based cleanup
+      at:
+        command: rm /etc/sudoers.d/{{ username }}
+        count: '{{ cleanup_delay | default('10') }}'
+        units: minutes
+      when: cleanup_delay != 0
