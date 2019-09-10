@@ -13,6 +13,6 @@
     - name: Time based cleanup
       at:
         command: rm /etc/sudoers.d/{{ username }}
-        count: '{{ cleanup_delay | default('10') }}'
+        count: '{{ cleanup_delay | default(10) }}'
         units: minutes
       when: cleanup_delay != 0
