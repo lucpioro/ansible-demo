@@ -1,6 +1,7 @@
 - name: Give basic sudoer permissions
   hosts: all
   gather_facts: false
+  become: true
   
   tasks:
     - name: Add user to wheel group
