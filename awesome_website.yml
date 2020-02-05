@@ -2,6 +2,7 @@
   hosts: all
   vars:
     index_title: Awesome website
+    index_content: Welcome to Ansible Automates Paris !
     index_foot: Hosted on {{ ansible_hostname }}
 
   tasks:
