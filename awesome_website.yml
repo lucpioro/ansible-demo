@@ -1,5 +1,3 @@
-# This playbook is meant to be called with ansible-pull
-# This is the default playbook if hostname is not found in this repo
 - name: Deploy Awesome website
   hosts: all
   vars:
@@ -8,21 +6,27 @@
                 Hosted on {{ ansible_hostname }}.
 
   tasks:
-  - name: httpd package is present
-    yum:
-      name: httpd
+  - when: command == deploy
+    block:
+      - name: httpd package is present
+        yum:
+          name: httpd
 
-  - name: latest index.html file is present
-    template:
-      src: index.html.j2
-      dest: /var/www/html/index.html
-      owner: apache
-      group: apache
+      - name: latest index.html file is present
+        template:
+          src: index.html.j2
+          dest: /var/www/html/index.html
+          owner: apache
+          group: apache
 
-  - name: httpd is started
+  - when: command == deploy or command == start         
+    name: Awesome website is started
     service:
       name: httpd
       state: started
 
-#  - debug:
-#      msg: Successful deployment on '{{ ec2_ip_address }}'
+  - when: command == stop
+    name: Awesome website is stopped
+    service:
+      name: httpd
+      state: stopped
