@@ -7,8 +7,8 @@
 " --------------------------------
 < Welcome to Ansible Automates ! >
  --------------------------------
-        \   
-"
+        \"
+
   tasks:
   - when: command == 'deploy'
     block:
