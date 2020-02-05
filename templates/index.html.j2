@@ -8,9 +8,9 @@
 
   	<h1></h1>
     <pre style="font-family:courier;"><strong>
- _______________________ 
+ {%for c in index_content %}_{%endfor%} 
 &lt; {{ index_content | default ('') }} &gt;
- ----------------------- 
+ {%for c in index_content %}-{%endfor%} 
         \   ^__^            
          \  (@@)\_______    
             (__)\       )\/\
