@@ -4,7 +4,7 @@
     index_title: Awesome website
     index_foot: Hosted on {{ ansible_hostname }}.
     index_content: |
- ________________________________
+ --------------------------------
 < Welcome to Ansible Automates ! >
  --------------------------------
         \   ^__^
