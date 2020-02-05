@@ -6,7 +6,20 @@
 
   <body style="text-align:center;background-color:darkcyan;font-family:helvetica;">
 
-  	<h1>{{ index_content | default ('') }}</h1>
+  	<h1 style="font-family:courier;">    
+ _______________________ 
+&lt; {{ index_content | default ('') }} &gt;
+ ----------------------- 
+        \   ^__^
+         \  (@@)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+$ 
+
+
+    </h1>
 
     <img src="{{ index_picture | default('https://www.redhat.com/cms/managed-files/Logotype_RH_AnsibleAutomation_RGB_Black_2.png') }}" alt="Ansible">  
 
