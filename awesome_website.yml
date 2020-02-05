@@ -6,7 +6,7 @@
                 Hosted on {{ ansible_hostname }}.
 
   tasks:
-  - when: command == deploy
+  - when: command == 'deploy'
     block:
       - name: httpd package is present
         yum:
@@ -19,13 +19,13 @@
           owner: apache
           group: apache
 
-  - when: command == deploy or command == start         
+  - when: command == 'deploy' or command == 'start'      
     name: Awesome website is started
     service:
       name: httpd
       state: started
 
-  - when: command == stop
+  - when: command == 'stop'
     name: Awesome website is stopped
     service:
       name: httpd
