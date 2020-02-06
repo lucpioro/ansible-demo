@@ -1,4 +1,4 @@
-- name: Deploy Awesome website
+- name: Manage Awesome website
   hosts: all
   vars:
     index_title: Awesome website
