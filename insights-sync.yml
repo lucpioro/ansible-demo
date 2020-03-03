@@ -1,0 +1,7 @@
+- name: Fetch remdiation playbooks
+  gather_facts: false
+  hosts: all
+  
+  tasks:
+    - import_role:
+        name: insights-sync
