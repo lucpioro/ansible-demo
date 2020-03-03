@@ -1,0 +1,3 @@
+roles:
+  - name: insights-sync
+    src: https://github.com/AutomationWitch/insights-sync
