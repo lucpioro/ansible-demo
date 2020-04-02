@@ -17,13 +17,9 @@
         path: /etc/redhat-access-insights/.registered
       register: reg_file_task
 
-    - name: Refresh Insights status if already registered
-      command: insights-client
-      when:
-        - unreg_file_task.stat.exists == false
-        - reg_file_task.stat.exists == true
-
     - name: Register to the Red Hat Access Insights Service
       command: insights-client --register --display-name={{ ansible_fqdn }} 
-      args:
-        creates: /etc/redhat-access-insights/.registered
+  
+    - name: Refresh Insights status if already registered
+      command: insights-client
+  
