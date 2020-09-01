@@ -7,24 +7,10 @@
       package:
         name: insights-client
 
-    - name: Check status of Insights .unregister file
-      stat:
-        path: /etc/redhat-access-insights/.unregistered
-      register: unreg_file_task
+    - name: Register to the Red Hat Insights Service
+      command: insights-client --register --display-name={{ ansible_fqdn }}
+      args:
+        creates: /etc/redhat-access-insights/.registered
 
-    - name: Check status of Insights .register file
-      stat:
-        path: /etc/redhat-access-insights/.registered
-      register: reg_file_task
-
-    - name: Unregister if we are setting the display_name, and we have already registered
-      command: insights-client --unregister
-      when:
-        - unreg_file_task.stat.exists == false
-        - reg_file_task.stat.exists == true
-
-    - name: Register to the Red Hat Access Insights Service
-      command: insights-client --register --display-name={{ ansible_fqdn }} 
-#      args:
-#        creates: /etc/redhat-access-insights/.registered
-#      when: unreg_file_task.stat.exists == false
+    - name: Upload latest Insights state
+      command: insights-client
