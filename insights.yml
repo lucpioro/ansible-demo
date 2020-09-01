@@ -10,7 +10,7 @@
     - name: Register to the Red Hat Insights Service
       command: insights-client --register --display-name={{ ansible_fqdn }}
       args:
-        creates: /etc/redhat-access-insights/.registered
+        creates: /etc/insights-client/.registered
 
     - name: Upload latest Insights state
       command: insights-client
