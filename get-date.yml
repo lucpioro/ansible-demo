@@ -1,13 +1,8 @@
-- name: Manage Awesome website
+- name: Get date 
   hosts: all
-  vars:
-    index_title: Awesome website
-    index_content: Welcome to Ansible Automates !
-    index_foot: Hosted on {{ ansible_hostname }}
 
   tasks:
   - when: command == 'deploy'
     block:
-      - name: httpd package is present
-        yum:
-          name: httpd
+      - name: Get timestamp from system
+        shell: "date +%Y-%m-%d%H-%M-%S"
