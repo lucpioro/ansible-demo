@@ -2,7 +2,5 @@
   hosts: all
 
   tasks:
-  - when: command == 'deploy'
-    block:
-      - name: Get timestamp from system
-        shell: "date +%Y-%m-%d%H-%M-%S"
+  - name: Get timestamp from system
+    shell: "date +%Y-%m-%d%H-%M-%S"
