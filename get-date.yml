@@ -2,4 +2,4 @@
   hosts: all
 
   tasks:
-  - debug: msg="{{ lookup('pipe','date') }}"
+  - debug: msg="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
